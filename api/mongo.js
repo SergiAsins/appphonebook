@@ -1,6 +1,6 @@
 // This file enables the connection with MongoDB and the CRUD operations
-const mongoose = require('mongoose');
-import { connect, Schema, model, connection } from 'mongoose';
+import pkg from 'mongoose';
+const { connect, Schema, model, connection } = pkg;
 
 
 // Verifies if the password was provided
