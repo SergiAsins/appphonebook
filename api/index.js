@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 import Person from '../models/person.js';
 import cors from 'cors';
 import path from 'path';
-import morganMiddleware from './morganMiddleware';
+import morganMiddleware from './morganMiddleware.js';
 
 dotenv.config(); //it loads the environment variables from the file .env
 
