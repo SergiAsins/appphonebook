@@ -1,6 +1,7 @@
 // This file enables the connection with MongoDB and the CRUD operations
+const mongoose = require('mongoose');
 import { connect, Schema, model, connection } from 'mongoose';
-import mongoose from 'mongoose'
+
 
 // Verifies if the password was provided
 if (process.argv.length<3) {
