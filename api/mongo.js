@@ -1,9 +1,10 @@
 // This file enables the connection with MongoDB and the CRUD operations
 import { connect, Schema, model, connection } from 'mongoose';
+import mongoose from 'mongoose'
 
 // Verifies if the password was provided
-if (process.argv.length < 3) {
-    console.log('please provide the password as an argument: node mongo.js <password>');
+if (process.argv.length<3) {
+    console.log('give password as argument');
     process.exit(1);
 }
 
@@ -12,7 +13,8 @@ const name = process.argv[3];
 const number = process.argv[4];
 
 const url = `mongodb+srv://HasanAsins:${password}@clusterasinshasan.yko1cvx.mongodb.net/phonebook?retryWrites=true&w=majority`;
-connect(url);
+mongoose.set('strictQuery',false)
+mongoose.connect(url);
 
 const personSchema = new Schema({
     name: String,
