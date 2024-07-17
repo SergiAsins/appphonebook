@@ -1,5 +1,7 @@
-require('dotenv').config();
+import { config } from 'dotenv';
 import mongoose from 'mongoose';
+
+config();
 
 const url = `mongodb+srv://HasanAsins:${password}@clusterasinshasan.yko1cvx.mongodb.net/phonebook?retryWrites=true&w=majority`
 
