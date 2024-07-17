@@ -25,9 +25,10 @@ if (!url) {
     throw new Error('MONGODB_URI is not defined');
   }
 
-mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => {console.log('connected to MongoDB');})
-  .catch((error) => {console.error('error connecting to MongoDB:', error.message);});
+mongoose.connect(url)
+  .then(() => { console.log('connected to MongoDB'); })
+  .catch((error) => { console.error('error connecting to MongoDB:', error.message); });
+
 
 
 app.use(cors()); // enables Cross-Origin Resource Sharing
