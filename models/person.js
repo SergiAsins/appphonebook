@@ -1,11 +1,8 @@
-import { config } from 'dotenv';
+//import { config } from 'dotenv';
 import mongoose from 'mongoose';
 
-config();
-
-const url = `mongodb+srv://HasanAsins:${password}@clusterasinshasan.yko1cvx.mongodb.net/phonebook?retryWrites=true&w=majority`
-
-mongoose.connect(url, {userNewUrlParser: true, userUnifiedToplogy: true});
+//const url = `mongodb+srv://HasanAsins:${password}@clusterasinshasan.yko1cvx.mongodb.net/phonebook?retryWrites=true&w=majority`
+//mongoose.connect(url, {userNewUrlParser: true, userUnifiedToplogy: true});
 
 const personSchema = new mongoose.Schema({
     name: {

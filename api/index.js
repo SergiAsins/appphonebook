@@ -1,18 +1,25 @@
 import express from 'express';
-import {config} from 'dotenv'
-import Person from '../models/person.js'
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+import Person from '../models/person.js';
 
 
-config();
+dotenv.config(); //it loads the environment variables from the file .env
 
 
-const PORT = process.env.PORT || 3001;
 const cors = import('cors');
 const morganMiddleware = import('./morganMiddleware'); //it imports the middleware of morgan
 const path = import('path')
 const app = express();
 
-
+const url = process.env.MONGODB_URI;
+mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => {
+    console.log('connected to MongoDB');
+  })
+  .catch((error) => {
+    console.error('error connecting to MongoDB:', error.message);
+  });
 
 app.use(cors()); // enables Cross-Origin Resource Sharing
 app.use(express.json()); // Enables the management of JSON data format in the petitions WITH Express middleware
@@ -21,7 +28,7 @@ app.use(express.static(path.join(__dirname, '../dist'))) // Serve static files f
 
 
 let persons = [
-    { id: 1, name: "Arto Hellas", number: "040-123456" },
+    { id: 1, name: "El Pepitos Local", number: "040-123456" },
     { id: 2, name: "Ada Lovelace", number: "39-44-5323523" },
     { id: 3, name: "Dan Abramov", number: "12-43-234345" },
     { id: 4, name: "Mary Poppendieck", number: "39-23-6423122" }
@@ -100,6 +107,7 @@ app.get('*', (req, res) => {
 }) 
 
 //listen in the specified port
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
