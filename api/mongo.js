@@ -28,7 +28,7 @@ const personSchema = new mongoose.Schema({
 const Person = mongoose.model('Person', personSchema);
 
 const person = new Person({
-    name: Mohammed,
+    name: 'Mohammed',
     number: 12312144455,
 })
 
