@@ -13,15 +13,22 @@ const name = process.argv[3];
 const number = process.argv[4];
 
 const url = `mongodb+srv://HasanAsins:${password}@clusterasinshasan.yko1cvx.mongodb.net/phonebook?retryWrites=true&w=majority`;
+
 mongoose.set('strictQuery',false)
+
 mongoose.connect(url);
 
-const personSchema = new Schema({
+const personSchema = new mongoose.Schema({
     name: String,
     number: String,
 });
 
-const Person = model('Person', personSchema);
+const Person = mongoose.model('Person', personSchema);
+
+const person = new Person({
+    name: Mohammed,
+    number: 12312144455,
+})
 
 // If only the password is provided, it shows all the entries
 if (process.argv.length === 3) {
