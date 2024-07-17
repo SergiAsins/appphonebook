@@ -2,14 +2,12 @@ import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import Person from '../models/person.js';
-
+import cors from 'cors';
+import path from 'path';
+import morganMiddleware from './morganMiddleware';
 
 dotenv.config(); //it loads the environment variables from the file .env
 
-
-const cors = import('cors');
-const morganMiddleware = import('./morganMiddleware'); //it imports the middleware of morgan
-const path = import('path')
 const app = express();
 
 const url = process.env.MONGODB_URI;
