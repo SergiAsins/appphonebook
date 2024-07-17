@@ -3,7 +3,7 @@ const cors = require('cors');
 const morganMiddleware = require('./morganMiddleware'); //it imports the middleware of morgan
 const path = require('path')
 const app = express();
-require('dotenv').config();
+//require('dotenv').config();
 const Person = require('../models/person.js')
 const PORT = process.env.PORT || 3001;
 
