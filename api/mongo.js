@@ -1,4 +1,5 @@
 // This file enables the connection with MongoDB and the CRUD operations
+import mongoose from 'mongoose';
 import pkg from 'mongoose';
 const { connect, Schema, model, connection } = pkg;
 
