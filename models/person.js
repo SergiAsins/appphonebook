@@ -1,5 +1,8 @@
 //import { config } from 'dotenv';
+import dotenv from 'dotenv';
 import mongoose from 'mongoose';
+
+dotenv.config({ path: join(__dirname, '..', '.env') }); //it loads the environment variables from the file .env
 
 //const url = `mongodb+srv://HasanAsins:${password}@clusterasinshasan.yko1cvx.mongodb.net/phonebook?retryWrites=true&w=majority`
 //mongoose.connect(url, {userNewUrlParser: true, userUnifiedToplogy: true});
