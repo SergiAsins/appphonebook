@@ -1,5 +1,5 @@
 import dotenv from 'dotenv';
-dotenv.config(); //it loads the environment variables from the file .env
+dotenv.config({ path: join(__dirname,'..', '.env') }); //it loads the environment variables from the file .env
 import express from 'express';
 import mongoose from 'mongoose';
 import Person from '../models/person.js';
