@@ -1,6 +1,6 @@
 import morgan from 'morgan';
-import fs from 'fs';
-import path from 'path';
+const fs = require('fs')
+const path = require('path');
 
 //creating a personalized token which logs the body of the petition 
 morgan.token('body', (req) => {
@@ -15,4 +15,4 @@ const morganMiddleware = morgan(':method :url :status :res[content-length] - :re
     stream: logStream //records the file
 });
 
-export default morganMiddleware;
+export default morganMiddleware;;
