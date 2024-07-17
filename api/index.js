@@ -5,19 +5,25 @@ import Person from '../models/person.js';
 import cors from 'cors';
 import path from 'path';
 import morganMiddleware from './morganMiddleware.js';
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
+
+
+// Resolve __dirname equivalent in ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 dotenv.config(); //it loads the environment variables from the file .env
 
 const app = express();
 
+
+//connects to MongoDB
 const url = process.env.MONGODB_URI;
 mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => {
-    console.log('connected to MongoDB');
-  })
-  .catch((error) => {
-    console.error('error connecting to MongoDB:', error.message);
-  });
+  .then(() => {console.log('connected to MongoDB');})
+  .catch((error) => {console.error('error connecting to MongoDB:', error.message);});
+
 
 app.use(cors()); // enables Cross-Origin Resource Sharing
 app.use(express.json()); // Enables the management of JSON data format in the petitions WITH Express middleware
