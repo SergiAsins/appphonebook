@@ -14,6 +14,6 @@ POST https://service-appphonebook.onrender.com/api/persons
 Content-Type: application/json
 
 {
-  "name": "el cocacolas",
+  "name": "el navajillas",
   "number": "123-4567890"
 }
