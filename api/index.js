@@ -13,7 +13,7 @@ import { dirname, join } from 'path';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-dotenv.config({ path: join(__dirname,'..', '.env') }); //it loads the environment variables from the file .env
+dotenv.config({ path: join(__dirname, '..', '.env') }); //it loads the environment variables from the file .env
 
 const app = express();
 
