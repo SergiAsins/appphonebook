@@ -5,7 +5,11 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 
-dotenv.config({ path: join(__dirname, '..', '.env') }); //it loads the environment variables from the file .env
+// Resolve __dirname equivalent in ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+dotenv.config({ path: join(__dirname, '..', '../env') }); //it loads the environment variables from the file .env
 
 //const url = `mongodb+srv://HasanAsins:${password}@clusterasinshasan.yko1cvx.mongodb.net/phonebook?retryWrites=true&w=majority`
 //mongoose.connect(url, {userNewUrlParser: true, userUnifiedToplogy: true});
