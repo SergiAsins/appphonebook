@@ -1,6 +1,6 @@
 import morgan from 'morgan';
-const fs = require('fs')
-const path = require('path');
+import fs from 'fs'
+import path from 'path'
 
 //creating a personalized token which logs the body of the petition 
 morgan.token('body', (req) => {
