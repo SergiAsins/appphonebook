@@ -15,4 +15,4 @@ const morganMiddleware = morgan(':method :url :status :res[content-length] - :re
     stream: logStream //records the file
 });
 
-module.exports = morganMiddleware;
+export default morganMiddleware;
