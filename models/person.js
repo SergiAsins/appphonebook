@@ -1,5 +1,5 @@
-require('dotenv').config
-const mongoose = require('mongoose');
+require('dotenv').config();
+import mongoose from 'mongoose';
 
 const url = `mongodb+srv://HasanAsins:${password}@clusterasinshasan.yko1cvx.mongodb.net/phonebook?retryWrites=true&w=majority`
 
@@ -8,11 +8,13 @@ mongoose.connect(url, {userNewUrlParser: true, userUnifiedToplogy: true});
 const personSchema = new mongoose.Schema({
     name: {
         type: String,
+        minlength: 3,
         required: true,
         unique: true
     },
     number: {
         type: String,
+        minlength: 8,
         required: true
     }
 });
@@ -25,4 +27,6 @@ personSchema.set('toJSON', {
     }
 });
 
-module.exports = mongoose.model('Person', personSchema);
+const Person = mongoose.model('Person', personSchema);
+
+export default Person;
