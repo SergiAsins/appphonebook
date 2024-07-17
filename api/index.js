@@ -1,6 +1,7 @@
+import dotenv from 'dotenv';
+dotenv.config(); //it loads the environment variables from the file .env
 import express from 'express';
 import mongoose from 'mongoose';
-import dotenv from 'dotenv';
 import Person from '../models/person.js';
 import cors from 'cors';
 import path from 'path';
@@ -13,13 +14,17 @@ import { dirname, join } from 'path';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-dotenv.config(); //it loads the environment variables from the file .env
 
 const app = express();
 
 
 //connects to MongoDB
 const url = process.env.MONGODB_URI;
+
+if (!url) {
+    throw new Error('MONGODB_URI is not defined');
+  }
+
 mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {console.log('connected to MongoDB');})
   .catch((error) => {console.error('error connecting to MongoDB:', error.message);});
@@ -28,7 +33,7 @@ mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
 app.use(cors()); // enables Cross-Origin Resource Sharing
 app.use(express.json()); // Enables the management of JSON data format in the petitions WITH Express middleware
 app.use(morganMiddleware);// It uses the middleware of Morgan
-app.use(express.static(path.join(__dirname, '../dist'))) // Serve static files from the 'dist' folder
+app.use(express.static(join(__dirname, '../dist'))); // Serve static files from the 'dist' folder
 
 
 let persons = [
@@ -107,7 +112,7 @@ app.get('/info', (req,res) => {
 
 //Serve the frontend for any other routes not managed by the API
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../dist'), 'index.html')
+    res.sendFile(join(__dirname, '../dist'), 'index.html')
 }) 
 
 //listen in the specified port
