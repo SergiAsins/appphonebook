@@ -1,12 +1,13 @@
-const express = import('express')
+import express from 'express';
 const cors = import('cors');
 const morganMiddleware = import('./morganMiddleware'); //it imports the middleware of morgan
 const path = import('path')
 const app = express();
-import('dotenv').config();
-const Person = import('../models/person.js')
+import {config} from 'dotenv'
+import Person from '../models/person.js'
 const PORT = process.env.PORT || 3001;
 
+config();
 
 app.use(cors()); // enables Cross-Origin Resource Sharing
 app.use(express.json()); // Enables the management of JSON data format in the petitions WITH Express middleware
