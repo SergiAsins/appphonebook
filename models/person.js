@@ -1,6 +1,9 @@
 //import { config } from 'dotenv';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
 
 dotenv.config({ path: join(__dirname, '..', '.env') }); //it loads the environment variables from the file .env
 
