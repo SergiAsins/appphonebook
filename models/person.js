@@ -4,15 +4,29 @@ import mongoose from 'mongoose';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
+const uniqueValidator = require('mongoose-unique-validator');
 
-// Resolve __dirname equivalent in ES modules
+mongoose.set('useFindAndModify', false)
+mongoose.set('useCreateIndex', true)
+
+const url = process.env.MONGODB_URI
+console.log('connecting to', url)
+
+mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => {
+    console.log('connected to MongoDB')
+  })
+  .catch((error) => {
+    console.log('error connecting to MongoDB:', error.message)
+  })
+
+/*Resolve __dirname equivalent in ES modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-
-dotenv.config({ path: join(__dirname, '..', '../env') }); //it loads the environment variables from the file .env
-
-//const url = `mongodb+srv://HasanAsins:${password}@clusterasinshasan.yko1cvx.mongodb.net/phonebook?retryWrites=true&w=majority`
-//mongoose.connect(url, {userNewUrlParser: true, userUnifiedToplogy: true});
+dotenv.config({ path: join(__dirname, '..', '../env') });
+const password = process.argv[2];
+mongoose.set('strictQuery',false)
+mongoose.connect(url); */
 
 const personSchema = new mongoose.Schema({
     name: {
@@ -28,6 +42,7 @@ const personSchema = new mongoose.Schema({
     }
 });
 
+//const Person = mongoose.model('Person', personSchema);
 personSchema.set('toJSON', {
     transform: (document, returnedObject) => {
         returnedObject.id = returnedObject._id.toString();
@@ -35,7 +50,6 @@ personSchema.set('toJSON', {
         delete returnedObject.__v;
     }
 });
+personSchema.plugin(uniqueValidator);
 
-const Person = mongoose.model('Person', personSchema);
-
-export default Person;
+module.exports = mongoose.model('Person', personSchema)
