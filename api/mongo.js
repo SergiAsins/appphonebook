@@ -26,8 +26,8 @@ mongoose.connect(url)
     });
 
 const person = new Person({
-    name: 'Mohammed',
-    number: 12312144455,
+    name: 'Bdhar',
+    number: 1244444455,
 })
 
 person.save().then(result => {
