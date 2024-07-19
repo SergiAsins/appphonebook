@@ -1,10 +1,11 @@
 //import { config } from 'dotenv';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
+import uniqueValidator from 'mongoose-unique-validator';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
-const uniqueValidator = import('mongoose-unique-validator');
+;
 
 //dotenv configuration
 const __filename = fileURLToPath(import.meta.url);
