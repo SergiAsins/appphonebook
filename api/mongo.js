@@ -2,7 +2,7 @@
 import mongoose from 'mongoose';
 import pkg from 'mongoose';
 const { connect, Schema, model, connection } = pkg;
-import Person from './models/persons.js'
+import Person from '../models/person.js'
 
 
 // Verifies if the password was provided
