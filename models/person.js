@@ -5,7 +5,7 @@ import uniqueValidator from 'mongoose-unique-validator';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
-;
+
 
 //dotenv configuration
 const __filename = fileURLToPath(import.meta.url);
@@ -30,6 +30,7 @@ dotenv.config({ path: join(__dirname, '..', '../env') });
 const password = process.argv[2];
 mongoose.set('strictQuery',false)
 mongoose.connect(url); */
+
 
 const personSchema = new mongoose.Schema({
     name: {
@@ -57,5 +58,6 @@ personSchema.set('toJSON', {
 });
 
 const Person = mongoose.model('Person', personSchema)
+
 
 export default Person;
