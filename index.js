@@ -14,7 +14,6 @@ const __dirname = dirname(__filename);
 dotenv.config({ path: join(__dirname, '..', '.env') });
 
 
-
 /*no està al solcuionari:
 import path from 'path'*/
 
