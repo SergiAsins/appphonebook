@@ -2,25 +2,30 @@ import express from 'express';
 const app = express();
 import cors from 'cors';
 import dotenv from 'dotenv';
+import morgan from 'morgan';
 import morganMiddleware from './api/morganMiddleware.js';
+import { join } from 'path';
 //import mongoose from 'mongoose';
 import Person from './models/person.js';
-/*import path from 'path';
-import { fileURLToPath } from 'url';
-import { dirname, join } from 'path'; */
 
+// AI: Configurar dotenv
+dotenv.config();
+
+/*no està al solcuionari:
+import path from 'path';
+import { fileURLToPath } from 'url';*/
 
 app.use(cors()); // enables Cross-Origin Resource Sharing
 app.use(express.json()); // Enables the management of JSON data format in the petitions WITH Express middleware
-app.use(express.static(join(__dirname, '../dist'))); // Serve static files from the 'dist' folder
+app.use(express.static(join(__dirname, 'dist'))); // Serve static files from the 'dist' folder
 app.use(morganMiddleware);// It uses the middleware of Morgan
 
-/* Resolve __dirname equivalent in ES modules
+/* no està al solcuionari - Resolve __dirname equivalent in ES modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 dotenv.config({ path: join(__dirname, '..', '.env') }); */
 
-//solution tokens morgan
+//solution: tokens morgan
 app.use(morgan((tokens, req, res) => {
     return [
       tokens.method(req, res),
@@ -33,17 +38,22 @@ app.use(morgan((tokens, req, res) => {
   }))
 
 
-//info
-app.get('/info', (req,res) => {
-    const numberOfPersons = Personerson.length;
-    const currentDate = new Date ();
-    const info =`
-        <p>Phonebook has info for ${numberOfPersons} people</p>
-        <p>${currentDate}</p>
-    `;
-    res.send(info);
+//info route:
+app.get('/info', (req, res) => {
+    const currentDate = new Date().toLocaleString();
+    const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
+    Person.find({}).then(persons => {
+        res.send(
+            `
+            <div>
+                <p>Phonebook has info for ${persons.length} people</p>
+            </div>
+            <div>
+                <p>${currentDate} (${timeZone})</p>
+            </div>`
+        )
+        })
 })
-
 
 //get all phonebook contacts from the DB
 app.get('/api/persons', (req, res) => {
@@ -99,7 +109,8 @@ app.post('/api/persons', (req,res,next) => {
     .then(savedAndFormattedPerson => {
         console.log(`added ${person.name} number ${person.number} to the phonebook`)
         res.json(savedAndFormattedPerson)
-    }).catch(error => next(error))
+    }).catch(error => next(error));
+    mongoose.connection.close()//no està a git
 });
 
 /*Serve the frontend for any other routes not managed by the API
