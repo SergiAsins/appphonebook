@@ -52,4 +52,6 @@ personSchema.set('toJSON', {
 });
 personSchema.plugin(uniqueValidator);
 
-module.exports = mongoose.model('Person', personSchema)
+const Person = mongoose.model('Person', personSchema)
+
+export default Person;
