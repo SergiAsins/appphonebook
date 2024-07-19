@@ -1,7 +1,7 @@
 // This file enables the connection with MongoDB and the CRUD operations
 import mongoose from 'mongoose';
-import pkg from 'mongoose';
-const { connect, Schema, model, connection } = pkg;
+/*import pkg from 'mongoose';
+const { connect, Schema, model, connection } = pkg;*/
 import Person from '../models/person.js'
 
 
@@ -11,7 +11,6 @@ if (process.argv.length<3) {
     process.exit(1);
 }
 
-//possible error xq al conexió a mongoDB està a person.js y mongo.js
 const password = process.argv[2];
 
 const url = `mongodb+srv://HasanAsins:${password}@clusterasinshasan.yko1cvx.mongodb.net/?retryWrites=true&w=majority&appName=ClusterAsinsHasan`

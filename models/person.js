@@ -6,11 +6,13 @@ import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 const uniqueValidator = import('mongoose-unique-validator');
 
-mongoose.set('useFindAndModify', false)
-mongoose.set('useCreateIndex', true)
+//dotenv configuration
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+dotenv.config({ path: join(__dirname, '..', '.env') });
 
-const url = process.env.MONGODB_URI
-console.log('connecting to', url)
+const url = process.env.MONGODB_URI;
+console.log('connecting to', url);
 
 mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
@@ -42,6 +44,8 @@ const personSchema = new mongoose.Schema({
     }
 });
 
+personSchema.plugin(uniqueValidator);
+
 //const Person = mongoose.model('Person', personSchema);
 personSchema.set('toJSON', {
     transform: (document, returnedObject) => {
@@ -50,7 +54,6 @@ personSchema.set('toJSON', {
         delete returnedObject.__v;
     }
 });
-personSchema.plugin(uniqueValidator);
 
 const Person = mongoose.model('Person', personSchema)
 
