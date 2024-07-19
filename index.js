@@ -1,29 +1,34 @@
 import express from 'express';
-const app = express();
 import cors from 'cors';
 import dotenv from 'dotenv';
 import morgan from 'morgan';
 import morganMiddleware from './api/morganMiddleware.js';
-import { join } from 'path';
+import { dirname, join } from 'path'
+import { fileURLToPath } from 'url';
 //import mongoose from 'mongoose';
 import Person from './models/person.js';
 
-// AI: Configurar dotenv
-dotenv.config();
+// Resolve __dirname equivalent in ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+dotenv.config({ path: join(__dirname, '..', '.env') });
+
+
 
 /*no està al solcuionari:
-import path from 'path';
-import { fileURLToPath } from 'url';*/
+import path from 'path'*/
+
+const app = express();
+
+// AI: Configurar dotenv
+dotenv.config();
 
 app.use(cors()); // enables Cross-Origin Resource Sharing
 app.use(express.json()); // Enables the management of JSON data format in the petitions WITH Express middleware
 app.use(express.static(join(__dirname, 'dist'))); // Serve static files from the 'dist' folder
 app.use(morganMiddleware);// It uses the middleware of Morgan
 
-/* no està al solcuionari - Resolve __dirname equivalent in ES modules
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-dotenv.config({ path: join(__dirname, '..', '.env') }); */
+
 
 //solution: tokens morgan
 app.use(morgan((tokens, req, res) => {
