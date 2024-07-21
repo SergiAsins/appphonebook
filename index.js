@@ -27,7 +27,6 @@ app.use(cors()); // enables Cross-Origin Resource Sharing
 app.use(express.json()); // Enables the management of JSON data format in the petitions WITH Express middleware
 app.use(express.static(join(__dirname, 'dist'))); // Serve static files from the 'dist' folder
 app.use(morganMiddleware);// It uses the middleware of Morgan
-app.use('/api/persons', persons)
 
 
 
