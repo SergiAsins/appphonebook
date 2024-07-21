@@ -49,7 +49,7 @@ app.use(morgan((tokens, req, res) => {
     ].join(' ')
   }))
 
-//
+//Configurar Correctamente las Rutas - solve 404
 app.get('/', (req, res) => {
     res.sendFile(path.resolve('dist/index.html'));
 });
