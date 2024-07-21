@@ -6,7 +6,7 @@ import morganMiddleware from './api/morganMiddleware.js';
 import { dirname, join } from 'path'
 import { fileURLToPath } from 'url';
 //import mongoose from 'mongoose';
-import Person from './models/person';
+import Person from './models/person.js';
 
 // Resolve __dirname equivalent in ES modules
 const __filename = fileURLToPath(import.meta.url);
