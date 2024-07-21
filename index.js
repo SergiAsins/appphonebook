@@ -49,8 +49,9 @@ app.use(morgan((tokens, req, res) => {
     ].join(' ')
   }))
 
+
 //Configurar Correctamente las Rutas - solve 404
-app.get('/', (req, res) => {
+app.get('', (req, res) => {
     res.sendFile(path.resolve('dist/index.html'));
 });
 
@@ -129,10 +130,10 @@ app.post('/api/persons', (req,res,next) => {
     mongoose.connection.close()//no està a git
 });
 
-/*Serve the frontend for any other routes not managed by the API
+//Serve the frontend for any other routes not managed by the API
 app.get('*', (req, res) => {
     res.sendFile(join(__dirname, '../dist'), 'index.html')
-}) */
+})
 
 app.put('/api/persons/:id', (request, response, next) => {
     const body = request.body
