@@ -7,6 +7,7 @@ import { dirname, join } from 'path'
 import { fileURLToPath } from 'url';
 //import mongoose from 'mongoose';
 import Person from './models/person.js';
+import persons from './src/services/persons.jsx';
 
 // Resolve __dirname equivalent in ES modules
 const __filename = fileURLToPath(import.meta.url);
@@ -26,6 +27,7 @@ app.use(cors()); // enables Cross-Origin Resource Sharing
 app.use(express.json()); // Enables the management of JSON data format in the petitions WITH Express middleware
 app.use(express.static(join(__dirname, 'dist'))); // Serve static files from the 'dist' folder
 app.use(morganMiddleware);// It uses the middleware of Morgan
+app.use('/api/persons', persons)
 
 
 
