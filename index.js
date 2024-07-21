@@ -6,7 +6,7 @@ import morganMiddleware from './api/morganMiddleware.js';
 import { dirname, join } from 'path'
 import { fileURLToPath } from 'url';
 //import mongoose from 'mongoose';
-import Person from './models/person.js';
+import Person from './models/person';
 
 // Resolve __dirname equivalent in ES modules
 const __filename = fileURLToPath(import.meta.url);
@@ -19,8 +19,16 @@ import path from 'path'*/
 
 const app = express();
 
+
 // AI: Configurar dotenv
 dotenv.config();
+
+//listen in the specified port
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});
+
 
 app.use(cors()); // enables Cross-Origin Resource Sharing
 app.use(express.json()); // Enables the management of JSON data format in the petitions WITH Express middleware
@@ -41,6 +49,10 @@ app.use(morgan((tokens, req, res) => {
     ].join(' ')
   }))
 
+//
+app.get('/', (req, res) => {
+    res.sendFile(path.resolve('dist/index.html'));
+});
 
 //info route:
 app.get('/info', (req, res) => {
@@ -151,8 +163,3 @@ const errorHandler = (error, request, response, next) => {
 app.use(errorHandler)
 
 
-//listen in the specified port
-const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-});
