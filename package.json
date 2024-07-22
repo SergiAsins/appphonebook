@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build --debug",
     "build:ui": "rm -rf dist && cd ../src && npm run build && cp -r dist ../api",
     "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
